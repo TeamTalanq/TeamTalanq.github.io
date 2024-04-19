@@ -50,7 +50,7 @@
   fetch(
     "https://jobsearch.api.jobtechdev.se/search?q=" +
       query +
-      "&qfields=location&qfields=occupation&offset=0&limit=100&sort=relevance",
+      "&qfields=location&qfields=occupation&offset=0&limit=100&sort=relevance&municipality=uYRx_AdM_r4A&municipality=yR8g_7Jz_HBZ&municipality=v5y4_YPe_TMZ&municipality=zBmE_n6s_MnQ",
     {
       headers: {
         accept: "application/json",
