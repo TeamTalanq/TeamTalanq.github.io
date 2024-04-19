@@ -1,0 +1,28 @@
+/* Basic styling for the widget */
+#widget-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+#data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#data-table th,
+#data-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#data-table th {
+  background-color: #f2f2f2;
+}
+
+#data-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
