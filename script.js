@@ -9,7 +9,7 @@
     "job-search-widget-pagination"
   );
   const search = container.dataset.search;
-  const query = search ? search : "snickare";
+  const query = search ? search : "blablabla";
   let page = 1;
   let d;
   let c;
@@ -46,11 +46,13 @@
       c ? (data.length < 5 ? data.length : page * 5) : data.length
     } of ${data.length} results`;
   };
+  let qq = ""
+  if ( query != "blablabla" ) { qq = "q=" + query + "&"; }
 
   fetch(
-    "https://jobsearch.api.jobtechdev.se/search?q=" +
-      query +
-      "&qfields=location&qfields=occupation&offset=0&limit=100&sort=relevance&municipality=uYRx_AdM_r4A&municipality=yR8g_7Jz_HBZ&municipality=v5y4_YPe_TMZ&municipality=zBmE_n6s_MnQ",
+    "https://jobsearch.api.jobtechdev.se/search?" +
+      qq +
+      "qfields=location&qfields=occupation&offset=0&limit=100&sort=relevance&municipality=uYRx_AdM_r4A&municipality=yR8g_7Jz_HBZ&municipality=v5y4_YPe_TMZ&municipality=zBmE_n6s_MnQ",
     {
       headers: {
         accept: "application/json",
