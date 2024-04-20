@@ -30,7 +30,7 @@
       }
 
       row.innerHTML = `
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><a target="_self">${item.headline}</a></td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><a target="_blank">${item.headline}</a></td>
         <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${item.duration.label}</td>
         <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${item.number_of_vacancies}</td>
       `;
@@ -45,7 +45,7 @@
 
     paginationText.textContent = `Showing ${page * 10 - 9} to ${
       c ? (data.length < 10 ? data.length : page * 10) : data.length
-    } of ${data.length} results`;
+    } of ${data.total.value} results`;
   };
   let qq = ""
   if ( query != "blablabla" ) { qq = "q=" + query + "&"; }
@@ -64,7 +64,7 @@
     .then((res) => res.json())
     .then((data) => {
       setInterval(() => {
-        d = data.length / 10;
+        d = data.total.value / 10;
         c = Number.isInteger(d)
           ? page !== Math.floor(d)
           : page !== Math.floor(d) + 1;
