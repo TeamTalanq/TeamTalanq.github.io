@@ -43,8 +43,8 @@
       i.href = data[anchors.indexOf(i)].webpage_url;
     });
 
-    paginationText.textContent = `Showing ${page * 5 - 4} to ${
-      c ? (data.length < 5 ? data.length : page * 5) : data.length
+    paginationText.textContent = `Showing ${page * 10 - 9} to ${
+      c ? (data.length < 10 ? data.length : page * 10) : data.length
     } of ${data.length} results`;
   };
   let qq = ""
