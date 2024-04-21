@@ -21,6 +21,8 @@
       "job-search-widget-container-table-body"
     );
 
+    if (tableBody == null ) return;
+
     tableBody.innerHTML = "";
 
     data.slice(page * 10 - 10, page * 10).forEach((item) => {
