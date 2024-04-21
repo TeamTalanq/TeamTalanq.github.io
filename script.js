@@ -16,6 +16,7 @@
   let _offset = 10;
 
   const populateTable = (data, value) => {
+    console.log(data);
     const tableBody = document.getElementById(
       "job-search-widget-container-table-body"
     );
