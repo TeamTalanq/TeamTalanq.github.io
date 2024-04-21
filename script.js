@@ -82,6 +82,31 @@
         if (c) {
           page += 1;
           _offset += 10;
+
+          fetch(
+            "https://jobsearch.api.jobtechdev.se/search?" +
+              qq +
+              "qfields=location&qfields=occupation&offset=" + _offset + "&limit=10&sort=relevance&municipality=uYRx_AdM_r4A&municipality=yR8g_7Jz_HBZ&municipality=v5y4_YPe_TMZ&municipality=zBmE_n6s_MnQ",
+            {
+              headers: {
+                accept: "application/json",
+                "x-feature-freetext-bool-method": "or",
+              },
+            }
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              setInterval(() => {
+                d = data.total.value / 10;
+                c = Number.isInteger(d)
+                  ? page !== Math.floor(d)
+                  : page !== Math.floor(d) + 1;
+        
+                populateTable(data.hits, data.total.value);
+              }, 1000);
+            })
+
+
         }
       });
     })
