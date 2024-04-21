@@ -15,7 +15,7 @@
   let c;
   let _offset = 10;
 
-  const populateTable = (data) => {
+  const populateTable = (data, value) => {
     const tableBody = document.getElementById(
       "job-search-widget-container-table-body"
     );
@@ -45,7 +45,7 @@
 
     paginationText.textContent = `Showing ${page * 10 - 9} to ${
       c ? (data.length < 10 ? data.length : page * 10) : data.length
-    } of ${data.total.value} results`;
+    } of ${value} results`;
   };
   let qq = ""
   if ( query != "blablabla" ) { qq = "q=" + query + "&"; }
@@ -69,7 +69,7 @@
           ? page !== Math.floor(d)
           : page !== Math.floor(d) + 1;
 
-        populateTable(data.hits);
+        populateTable(data.hits, data.total.value);
       }, 1000);
 
       previousButton.addEventListener("click", () => {
