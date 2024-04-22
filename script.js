@@ -8,21 +8,45 @@
   const paginationText = document.getElementById(
     "job-search-widget-pagination"
   );
-  const search = container.dataset.search;
-  const query = search ? search : "blablabla";
+  let search = container.dataset.search;
+  let query = search ? search : "blablabla";
   let page = 1;
   let d;
   let c;
-  let _offset = 10;
+  var intervalId = null;
 
+  function clickNext(event) {
+    if (c) {
+      page += 1;
+    }
+  }
+
+  function clickPrevious(event) {
+    if (page !== 1) {
+      page -= 1;
+    }
+  }
+
+  const searchField = document.getElementById( "dataSearch" );
+  if (searchField !== null ) {
+    searchField.addEventListener("change", (e) => {
+      if ( search !== e.target.value ) {
+        search = e.target.value;
+        query = search ? search : "blablabla";
+        clearInterval(intervalId);
+        previousButton.removeEventListener("click", clickPrevious);
+        nextButton.removeEventListener("click", clickNext);
+        page = 1;
+        getData(query);
+      }
+    });
+  }
+  
   const populateTable = (data, value) => {
-    // console.log(data);
     const tableBody = document.getElementById(
       "job-search-widget-container-table-body"
     );
-
     if (tableBody == null ) return;
-
     tableBody.innerHTML = "";
 
     data.slice(page * 10 - 10, page * 10).forEach((item) => {
@@ -47,16 +71,17 @@
     });
 
     paginationText.textContent = `Showing ${page * 10 - 9} to ${
-      c ? (data.length < 10 ? data.length : page * 10) : data.length
+      c ? (value < 10 ? value : page * 10) : value
     } of ${value} results`;
   };
-  let qq = ""
-  if ( query != "blablabla" ) { qq = "q=" + query + "&"; }
-
-  fetch(
-    "https://jobsearch.api.jobtechdev.se/search?" +
-      qq +
-      "qfields=location&qfields=occupation&offset=" + _offset + "&limit=10&sort=relevance&municipality=uYRx_AdM_r4A&municipality=yR8g_7Jz_HBZ&municipality=v5y4_YPe_TMZ&municipality=zBmE_n6s_MnQ",
+  
+  getData = (query) => {
+    let qq = ""
+    if ( query != "blablabla" ) { qq = "q=" + query + "&"; }
+    let q = "https://jobsearch.api.jobtechdev.se/search?municipality=zBmE_n6s_MnQ&municipality=v5y4_YPe_TMZ&municipality=yR8g_7Jz_HBZ&municipality=uYRx_AdM_r4A&" + qq 
+            + "offset=0&limit=100&sort=relevance";
+    fetch(
+    q,
     {
       headers: {
         accept: "application/json",
@@ -66,57 +91,27 @@
   )
     .then((res) => res.json())
     .then((data) => {
-      setInterval(() => {
+      intervalId = setInterval(() => {
         d = data.total.value / 10;
         c = Number.isInteger(d)
           ? page !== Math.floor(d)
           : page !== Math.floor(d) + 1;
-
-          
         populateTable(data.hits, data.total.value);
       }, 1000);
 
-      previousButton.addEventListener("click", () => {
-        if (page !== 1) {
-          page -= 1;
-          _offset -= 10;
-        }
-      });
-      nextButton.addEventListener("click", () => {
-        if (c) {
-          page += 1;
-          _offset += 10;
-
-          fetch(
-            "https://jobsearch.api.jobtechdev.se/search?" +
-              qq +
-              "qfields=location&qfields=occupation&offset=" + _offset + "&limit=10&sort=relevance&municipality=uYRx_AdM_r4A&municipality=yR8g_7Jz_HBZ&municipality=v5y4_YPe_TMZ&municipality=zBmE_n6s_MnQ",
-            {
-              headers: {
-                accept: "application/json",
-                "x-feature-freetext-bool-method": "or",
-              },
-            }
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              setInterval(() => {
-                d = data.total.value / 10;
-                c = Number.isInteger(d)
-                  ? page !== Math.floor(d)
-                  : page !== Math.floor(d) + 1;
-        
-                populateTable(data.hits, data.total.value);
-              }, 1000);
-            })
-
-
-        }
-      });
+      previousButton.addEventListener("click", clickPrevious);
+      nextButton.addEventListener("click", clickNext);
     })
     .catch((e) => {
       console.error(e);
       alert("An error occured while fetching data.");
     });
+  };
+
+  getData(query);
+
 })();
 // );
+
+
+// https://jobsearch.api.jobtechdev.se/search?q=cnc&qfields=location&qfields=occupation&offset=0&limit=100&sort=relevance&municipality=uYRx_AdM_r4A&municipality=yR8g_7Jz_HBZ&municipality=v5y4_YPe_TMZ&municipality=zBmE_n6s_MnQ"

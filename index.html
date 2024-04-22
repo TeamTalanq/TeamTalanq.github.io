@@ -9,10 +9,15 @@
   <body>
     <div
       id="job-search-widget-container"
-      data-search="städare"
+      data-search=""
       style="width: 80%; margin: 0 auto; padding: 20px; border: 1px solid #ccc"
     >
       <h2>Job search</h2>
+      <form>
+        <label for="dataSearch">Sök jobbannonser med fritext:</label>
+        <input type="text" id="dataSearch" name="dataSearch" 
+          onchange=" document.getElementById('job-search-widget-container').dataset.search = this.value;"><br>
+      </form>
       <table
         id="data-table"
         style="width: 100%; border-collapse: collapse; margin-top: 20px"
