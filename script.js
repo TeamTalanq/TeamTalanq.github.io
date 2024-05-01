@@ -10,7 +10,7 @@
   );
   let region1 = container.dataset.region;
   let region = region1 ? "&region=" + region1 : ""
-  console.log(region)
+  // console.log(region)
   let search = container.dataset.search;
   let query = search ? search : "blablabla";
   let page = 1;
@@ -87,7 +87,7 @@
             + "offset=0&limit=100&sort=relevance";
     else
       q = "https://jobsearch.api.jobtechdev.se/search?" + qq + "offset=0&limit=100&sort=relevance" + region;
-    console.log(q)
+    // console.log(q)
     fetch(
     q,
     {
