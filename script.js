@@ -8,6 +8,9 @@
   const paginationText = document.getElementById(
     "job-search-widget-pagination"
   );
+  let region1 = container.dataset.region;
+  let region = region1 ? "&region=" + region1 : ""
+  console.log(region)
   let search = container.dataset.search;
   let query = search ? search : "blablabla";
   let page = 1;
@@ -78,8 +81,13 @@
   getData = (query) => {
     let qq = ""
     if ( query != "blablabla" ) { qq = "q=" + query + "&"; }
-    let q = "https://jobsearch.api.jobtechdev.se/search?municipality=zBmE_n6s_MnQ&municipality=v5y4_YPe_TMZ&municipality=yR8g_7Jz_HBZ&municipality=uYRx_AdM_r4A&" + qq 
+    let q = ""
+    if (region == "")
+      q = "https://jobsearch.api.jobtechdev.se/search?municipality=zBmE_n6s_MnQ&municipality=v5y4_YPe_TMZ&municipality=yR8g_7Jz_HBZ&municipality=uYRx_AdM_r4A&" + qq 
             + "offset=0&limit=100&sort=relevance";
+    else
+      q = "https://jobsearch.api.jobtechdev.se/search?" + qq + "offset=0&limit=100&sort=relevance" + region;
+    console.log(q)
     fetch(
     q,
     {
