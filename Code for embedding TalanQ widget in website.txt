@@ -1,11 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Widget Example</title>
-  </head>
-  <body>
+//////////////////////////////////////////////
+/////           REACT PROJECT           //////
+//////////////////////////////////////////////
+<div id="job-search-widget-container" data-search="" style={{ width: "80%", margin: "0 auto", padding: "10px", border: "1px solid #ccc"}}>
+<div>
+  <form>
+    <label >Sök jobbannonser med fritext: </label> &nbsp;
+    <input type="text" id="dataSearch" name="datasSearch" style={{ border: "1px solid #000", backgroundColor: "#f7f7f7"}}/>
+  </form>
+</div>
+<table id="data-table" style={{ width: "100%", borderCollapse: "collapse", marginTop: "10px"}}>
+    <thead>
+        <tr> 
+            <th style={{ width: "70%", border: "1px solid #ccc", padding: "4px", textAlign: "left", backgroundColor: "#e2e2e2"}}>
+                Titel
+            </th>
+            <th style={{ width: "25%", border: "1px solid #ccc", padding: "4px", textAlign: "left", backgroundColor: "#e2e2e2"}}>
+                Omfattning
+            </th>
+            <th style={{ width: "5%",  border: "1px solid #ccc", padding: "4px", textAlign: "center", backgroundColor: "#e2e2e2"}}>
+                Antal
+            </th>
+        </tr>
+    </thead>
+    <tbody id="job-search-widget-container-table-body"></tbody>
+</table>
+
+<div style={{ paddingTop: "1rem", paddingBottom: "0.2rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", flexDirection: "row", flexWrap: "wrap", flexShrink: 0}}>
+    <p style={{ fontSize: "0.875rem", marginRight: "auto"}} id="job-search-widget-pagination"></p>
+
+    <div style={{ display: "flex", gap: "0.5rem"}}>
+        <button style={{ fontSize: "0.875rem", border: "1px solid #000", padding: "0.375rem 0.75rem", cursor: "pointer"}} id="job-search-widget-previous-button">
+            Previous
+        </button>
+
+        <button style={{ fontSize: "0.875rem", border: "1px solid #000", padding: "0.375rem 0.75rem", cursor: "pointer"}} id="job-search-widget-next-button">
+            Next
+        </button>
+    </div>
+</div>
+</div>
+<Script src="https://teamtalanq.github.io/script.js"
+defer async id="external" type="text/javascript" crossOrigin="anonymous" />
+
+
+//////////////////////////////////////////////
+/////            HTML PROJECT           //////
+//////////////////////////////////////////////
     <div
       id="job-search-widget-container"
       data-search=""
@@ -102,6 +142,5 @@
         </div>
       </div>
     </div>
-    <script src="https://teamtalanq.github.io/script.js"></script>
-  </body>
-</html>
+    <script src="script.js"></script>
+

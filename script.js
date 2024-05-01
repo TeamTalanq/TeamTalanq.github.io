@@ -52,7 +52,7 @@
     data.slice(page * 10 - 10, page * 10).forEach((item) => {
       const row = document.createElement("tr");
 
-      if (data.indexOf(item) % 2 === 0) {
+      if (data.indexOf(item) % 2 === 1) {
         row.style.backgroundColor = "#f2f2f2";
       }
 
