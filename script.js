@@ -34,6 +34,9 @@
   if (searchField !== null ) {
     searchField.addEventListener("change", (e) => {
       if ( search !== e.target.value ) {
+    // searchField.addEventListener("input", (e) => {
+    //   if ( (e.target.value.length == 0 || e.target.value.length > 2) && search !== e.target.value ) {
+    //     console.log(e.target.value.length)
         search = e.target.value;
         query = search ? search : "blablabla";
         clearInterval(intervalId);
@@ -61,8 +64,8 @@
 
       row.innerHTML = `
         <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><a target="_blank">${item.headline}</a></td>
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${item.duration.label}</td>
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${item.number_of_vacancies}</td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${item.duration.label == null ? "" : item.duration.label}</td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${item.number_of_vacancies == null ? "" : item.number_of_vacancies }</td>
       `;
       tableBody.appendChild(row);
     });
